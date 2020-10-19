@@ -35,10 +35,11 @@ namespace Neno
 
 		int tickBase;
 
-		void ProcessMap();
+		bool ProcessMap();
 		void RenderGrid();
 		void RenderNextBricks();
 	public:
+		~GameScreen();
 		void Initialize();
 		void Update(float framesPerSecond);
 		void Render();

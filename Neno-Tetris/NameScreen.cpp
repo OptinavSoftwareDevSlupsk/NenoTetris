@@ -4,7 +4,14 @@ namespace Neno
 {
 	NameScreen::~NameScreen()
 	{
+		delete font;
+		delete titleFont;
 
+		font = nullptr;
+		titleFont = nullptr;
+
+		titleColors.clear();
+		titleColors.shrink_to_fit();
 	}
 
 	NameScreen::NameScreen(int points)

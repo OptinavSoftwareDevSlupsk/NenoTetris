@@ -345,7 +345,7 @@ namespace Neno
 			{
 				if (currentBricks[x][y] != nullptr)
 				{
-					if (mapX + x >= MAP_WIDTH || mapY + y >= MAP_HEIGHT)
+					if (mapX + x >= MAP_WIDTH || mapY + y >= MAP_HEIGHT || map[mapX + x][mapY + y] != nullptr)
 					{
 						return false;
 					}

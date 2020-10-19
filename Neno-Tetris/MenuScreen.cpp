@@ -16,12 +16,6 @@ namespace Neno
 		newGameButton = nullptr;
 		exitButton = nullptr;
 
-		for (int a = 0; a < titleColors.size(); a++)
-		{
-			delete titleColors[a];
-			titleColors[a] = nullptr;
-		}
-
 		titleColors.clear();
 		titleColors.shrink_to_fit();
 	}
