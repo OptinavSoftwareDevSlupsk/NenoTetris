@@ -2,6 +2,25 @@
 
 namespace Neno
 {
+	GameScreen::~GameScreen()
+	{
+		delete mainMusic;
+		delete scoreFont;
+		delete brickTexture;
+		delete gridColor;
+
+		mainMusic = nullptr;
+		scoreFont = nullptr;
+		brickTexture = nullptr;
+		gridColor = nullptr;
+
+		brickColors.clear();
+		brickColors.shrink_to_fit();
+
+		brickObjects.clear();
+		brickObjects.shrink_to_fit();
+	}
+
 	void GameScreen::Initialize()
 	{
 		srand(time(NULL));
@@ -19,7 +38,6 @@ namespace Neno
 
 		scoreFont = new Font("Content/Fonts/PressStart2P-Regular.ttf", 32, 32, 58);
 		brickTexture = new Texture("Content/Graphics/brickBase.png");
-		Sound::Initialize();
 		mainMusic = new Sound("Content/Audio/Korobeiniki.wav");
 		gridColor = new Color(15, 15, 15);
 
@@ -63,7 +81,8 @@ namespace Neno
 			}
 			else
 			{
-				ProcessMap();
+				if (ProcessMap())
+					return;
 			}
 			
 			tickBase = 0;
@@ -167,7 +186,7 @@ namespace Neno
 		}
 	}
 
-	void GameScreen::ProcessMap()
+	bool GameScreen::ProcessMap()
 	{
 		if (currentBrickObject->AddToMap(map))
 		{
@@ -221,10 +240,12 @@ namespace Neno
 			}
 
 			points += (rowsToDelete.size()*10);
+			return false;
 		}
 		else
 		{
 			ScreenManager::SetScreen(new NameScreen(points));
+			return true;
 		}
 	}
 }
